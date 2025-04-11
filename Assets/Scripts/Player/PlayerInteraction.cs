@@ -9,16 +9,16 @@ public class PlayerInteraction : MonoBehaviour
     public bool CanInteract => CheckCanInteract();
     private bool _interactLock = false;
     
-    private PlayerBodyCarry _playerBodyCarry;
+    private PlayerBodyGrab _playerBodyGrab;
 
     private void Start()
     {
-        _playerBodyCarry = GetComponent<PlayerBodyCarry>();
+        _playerBodyGrab = GetComponent<PlayerBodyGrab>();
     }
 
     private bool CheckCanInteract()
     {
-        return !_interactLock && _playerBodyCarry.CarryingBody;
+        return !_interactLock && _playerBodyGrab.CarryingBody;
     }
 
     public void Interact()
@@ -31,6 +31,6 @@ public class PlayerInteraction : MonoBehaviour
 
     private void InteractionSuccessful(InteractiveObject interactive)
     {
-        if(interactive is Body body) _playerBodyCarry.CarryBody(body);
+        if(interactive is Body body) _playerBodyGrab.GrabBody(body);
     }
 }

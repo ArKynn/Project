@@ -6,7 +6,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody _rigidbody;
     private PlayerInput _input;
     private PlayerInteraction _playerInteraction;
-    private PlayerBodyCarry _playerBodyCarry;
+    private PlayerBodyGrab _playerBodyGrab;
 
     [Header("Movement Settings")]
     [SerializeField] private float movementSpeed;
@@ -42,7 +42,7 @@ public class PlayerController : MonoBehaviour
 
     private void HandleContextAction()
     {
-        if (_playerBodyCarry.CarryingBody) _playerBodyCarry.ThrowBody();
+        if (_playerBodyGrab.CarryingBody) _playerBodyGrab.ThrowBody();
         else _playerInteraction.Interact();
     }
 

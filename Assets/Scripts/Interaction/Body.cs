@@ -4,9 +4,4 @@
     {
         return true;
     }
-
-    public void GetThrown()
-    {
-        
-    }
 }
