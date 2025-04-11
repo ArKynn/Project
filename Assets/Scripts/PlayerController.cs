@@ -1,4 +1,5 @@
 using System.Linq.Expressions;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -10,6 +11,7 @@ public class PlayerController : MonoBehaviour
     [Header("Movement Settings")]
     [SerializeField] private float movementSpeed;
     [SerializeField] private float maxSpeed;
+    [SerializeField] [Range(0f, 1f)] private float breakPercentage;
     [SerializeField] private float rotationSpeed;
     private Vector2 _movementVector;
 
@@ -55,11 +57,20 @@ public class PlayerController : MonoBehaviour
 
     private void Move()
     {
-        if (_rigidbody.linearVelocity.magnitude < maxSpeed)
+        if (MovementVector.magnitude != 0)
         {
-            MovementVector *= movementSpeed;
-            var movementForce = MovementVector;
-            _rigidbody.AddForce(movementForce, ForceMode.Force);
+            if (_rigidbody.linearVelocity.magnitude < maxSpeed)
+            {
+                MovementVector *= movementSpeed;
+                var movementForce = MovementVector;
+                _rigidbody.AddForce(movementForce, ForceMode.Force);
+            }
+        }
+        else
+        {
+            var breakForce = breakPercentage * _rigidbody.linearVelocity.magnitude * -_rigidbody.linearVelocity;
+            _rigidbody.AddForce(breakForce, ForceMode.Force);
+            if(Mathf.Approximately(_rigidbody.linearVelocity.magnitude, 0)) _rigidbody.linearVelocity = Vector3.zero;
         }
         _rigidbody.angularVelocity = Vector3.zero;
     }
