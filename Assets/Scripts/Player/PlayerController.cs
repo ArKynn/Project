@@ -1,5 +1,3 @@
-using System.Linq.Expressions;
-using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -7,6 +5,7 @@ public class PlayerController : MonoBehaviour
 {
     private PlayerInput _input;
     private Rigidbody _rigidbody;
+    private PlayerInteraction _playerInteraction;
 
     [Header("Movement Settings")]
     [SerializeField] private float movementSpeed;
@@ -33,7 +32,7 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         GetInputs();
-        if (_interact) ;//call playerInteraction
+        if (_interact) _playerInteraction.Interact();
     }
 
     private void GetInputs()
