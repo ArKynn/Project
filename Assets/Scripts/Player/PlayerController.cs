@@ -3,9 +3,10 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
-    private PlayerInput _input;
     private Rigidbody _rigidbody;
+    private PlayerInput _input;
     private PlayerInteraction _playerInteraction;
+    private PlayerBodyCarry _playerBodyCarry;
 
     [Header("Movement Settings")]
     [SerializeField] private float movementSpeed;
@@ -19,7 +20,6 @@ public class PlayerController : MonoBehaviour
         get => new (_movementVector.x, 0, _movementVector.y); 
         private set => _movementVector = new Vector2(value.x, value.z);
     }
-    private bool _interact;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -31,14 +31,19 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        GetInputs();
-        if (_interact) _playerInteraction.Interact();
+        HandleInputs();
     }
 
-    private void GetInputs()
+    private void HandleInputs()
     {
         _movementVector = _input.actions["Move"].ReadValue<Vector2>();
-        _interact = _input.actions["Interact"].ReadValue<float>() > 0;
+        if(_input.actions["Action"].ReadValue<float>() > 0) HandleContextAction();
+    }
+
+    private void HandleContextAction()
+    {
+        if (_playerBodyCarry.CarryingBody) _playerBodyCarry.ThrowBody();
+        else _playerInteraction.Interact();
     }
 
     private void FixedUpdate()
@@ -50,7 +55,7 @@ public class PlayerController : MonoBehaviour
     private void RotateBody()
     {
         if(MovementVector.magnitude == 0) return;
-        var targetRotation = Quaternion.LookRotation(MovementVector);
+        var targetRotation = Quaternion.LookRotation(MovementVector, transform.up);
         transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
     }
 

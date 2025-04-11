@@ -2,8 +2,8 @@
 
 public class InteractiveObject : MonoBehaviour
 {
-    public void Interact()
+    public bool Interact()
     {
-        
+        return false;
     }
 }
