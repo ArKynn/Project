@@ -10,6 +10,8 @@ public static class Detector
         Physics.SphereCastNonAlloc(areaCenter.position, areaRadius, areaCenter.forward, hit, 0, layerMask);
         foreach (var obj in hit)
         {
+            if(obj.transform == null) continue;
+            
             T temp;
             if((temp = obj.transform.GetComponent<T>()) != null) foundObjects.Add(temp);
         }

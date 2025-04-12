@@ -22,6 +22,7 @@ public class PlayerBodyGrab : MonoBehaviour
         if (bodyRb != null)
         {
             _grabBody.transform.parent = null;
+            _grabBody.Interact();
             bodyRb.AddForce(GetThrowVector() * throwForce, ForceMode.Impulse);
         }
 
@@ -31,7 +32,7 @@ public class PlayerBodyGrab : MonoBehaviour
 
     private Vector3 GetThrowVector()
     {
-        return Quaternion.AngleAxis(yThrowAngle, Vector3.right) * transform.forward;
+        return Quaternion.AngleAxis(-yThrowAngle, Vector3.right) * transform.forward;
     }
 
     public void GrabBody(Body body)

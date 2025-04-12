@@ -207,6 +207,8 @@ GameObject:
   - component: {fileID: 150373224961075201}
   - component: {fileID: 5698298671020918818}
   - component: {fileID: 9056880992517531153}
+  - component: {fileID: 1797511206371983299}
+  - component: {fileID: 9142623155513677237}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -228,6 +230,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7307052255175471283}
+  - {fileID: 938064315214154350}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!136 &981897201714165843
@@ -326,6 +329,38 @@ MonoBehaviour:
   maxSpeed: 10
   breakPercentage: 0.75
   rotationSpeed: 360
+--- !u!114 &1797511206371983299
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2591488204347513052}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5037b2d6f01448b9d5bc9dfe7260519, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  grabParent: {fileID: 8289646389301423933}
+  grabOffset: {x: 0, y: 0, z: 0}
+  throwForce: 25
+  yThrowAngle: 15
+--- !u!114 &9142623155513677237
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2591488204347513052}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8009dbe4ca5a4160b5124e507eab5d53, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactionRange: 3
+  interactionLayerMask:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!1 &3385765055042385463
 GameObject:
   m_ObjectHideFlags: 0
@@ -357,5 +392,36 @@ Transform:
   m_Children:
   - {fileID: 7107632270619676047}
   - {fileID: 432053965322680366}
+  m_Father: {fileID: 6310057944204495935}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &8289646389301423933
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 938064315214154350}
+  m_Layer: 0
+  m_Name: GrabTarget
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &938064315214154350
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8289646389301423933}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.645, y: 0.987, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
   m_Father: {fileID: 6310057944204495935}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

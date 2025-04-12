@@ -1,7 +1,24 @@
-﻿public class Body : InteractiveObject
+﻿using UnityEngine;
+
+public class Body : InteractiveObject
 {
-    public bool Interact()
+    private Rigidbody _rb;
+
+    private void Start()
     {
+        _rb = GetComponent<Rigidbody>();
+    }
+
+    public override bool Interact()
+    {
+        ToggleRigidBody();
         return true;
+    }
+
+    private void ToggleRigidBody()
+    {
+        _rb.isKinematic = !_rb.isKinematic;
+        _rb.detectCollisions = !_rb.detectCollisions;
+        
     }
 }

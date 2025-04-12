@@ -26,6 +26,8 @@ public class PlayerController : MonoBehaviour
     {
         _input = GetComponent<PlayerInput>();
         _rigidbody = GetComponent<Rigidbody>();
+        _playerBodyGrab = GetComponent<PlayerBodyGrab>();
+        _playerInteraction = GetComponent<PlayerInteraction>();
     }
 
     // Update is called once per frame
@@ -37,7 +39,7 @@ public class PlayerController : MonoBehaviour
     private void HandleInputs()
     {
         _movementVector = _input.actions["Move"].ReadValue<Vector2>();
-        if(_input.actions["Action"].ReadValue<float>() > 0) HandleContextAction();
+        if(_input.actions["Action"].WasPressedThisFrame()) HandleContextAction();
     }
 
     private void HandleContextAction()

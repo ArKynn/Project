@@ -18,7 +18,7 @@ public class PlayerInteraction : MonoBehaviour
 
     private bool CheckCanInteract()
     {
-        return !_interactLock && _playerBodyGrab.CarryingBody;
+        return !_interactLock && !_playerBodyGrab.CarryingBody;
     }
 
     public void Interact()
@@ -26,7 +26,7 @@ public class PlayerInteraction : MonoBehaviour
         if (!CanInteract) return;
 
         var interactive = Detector.GetClosestInArea<InteractiveObject>(transform, interactionRange, interactionLayerMask);
-        if(interactive.Interact()) InteractionSuccessful(interactive);
+        if(interactive != null && interactive.Interact()) InteractionSuccessful(interactive);
     }
 
     private void InteractionSuccessful(InteractiveObject interactive)

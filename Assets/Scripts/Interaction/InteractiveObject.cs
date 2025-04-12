@@ -2,7 +2,7 @@
 
 public class InteractiveObject : MonoBehaviour
 {
-    public bool Interact()
+    public virtual bool Interact()
     {
         return false;
     }
